@@ -9,11 +9,11 @@ class Instructions:
     def __init__(self, folders=["instructions", "json"]):
         app = App()
         self.data = {}
-        jsonDir = app.joinPath(*folders)
+        jsonDir = app.joinPaths(*folders)
         jsonFiles = app.listDir(jsonDir)
         for filename in jsonFiles:
             if filename.endswith(".json"):
-                filepath = app.joinPath(jsonDir, filename)
+                filepath = app.joinPaths(jsonDir, filename)
                 with open(filepath, "r") as file:
                     configName = filename.split(".")[0]
                     self.data[configName] = json.load(file)
