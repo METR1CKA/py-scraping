@@ -51,7 +51,7 @@ for header in headers:
     data.append({"Titulo": title, "Curiosidad": curiosity})
 
 df = pd.DataFrame(data)
-df.to_excel("lostravelos.xlsx", index=False)
+df.to_excel("docs/lostraveleros/lostravelos.xlsx", index=False)
 
 sleep(1)
 

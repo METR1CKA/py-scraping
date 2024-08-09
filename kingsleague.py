@@ -40,81 +40,81 @@ element.click()
 sleep(4)
 
 # Get data for splits spain
-# splits_xpath = [
-#     '//*[@id="main-container"]/main/section[1]/div[1]/div/button[1]',
-#     '//*[@id="main-container"]/main/section[1]/div[1]/div/button[2]',
-#     '//*[@id="main-container"]/main/section[1]/div[1]/div/button[5]',
-# ]
+splits_xpath = [
+    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[1]',
+    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[2]',
+    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[5]',
+]
 
-# for i, split_xpath in enumerate(splits_xpath):
-#     element = driver.find_element(By.XPATH, split_xpath)
-#     element.click()
-#     sleep(1)
+for i, split_xpath in enumerate(splits_xpath):
+    element = driver.find_element(By.XPATH, split_xpath)
+    element.click()
+    sleep(1)
 
-#     elements = driver.find_elements(By.XPATH, '//*[@id="standingDesktop"]/div/div')
-#     sleep(1)
+    elements = driver.find_elements(By.XPATH, '//*[@id="standingDesktop"]/div/div')
+    sleep(1)
 
-#     headers = []
-#     data = []
+    headers = []
+    data = []
 
-#     header_div = elements[0]
-#     header_texts = header_div.text.split("\n")
-#     headers = header_texts
+    header_div = elements[0]
+    header_texts = header_div.text.split("\n")
+    headers = header_texts
 
-#     for element in elements[1:]:
-#         text_list = element.text.split("\n")
-#         data.append(text_list)
+    for element in elements[1:]:
+        text_list = element.text.split("\n")
+        data.append(text_list)
 
-#     df = pd.DataFrame(data, columns=headers)
-#     df.to_excel(f"kingsleague_spain_split_{i+1}.xlsx", index=False)
-#     sleep(1)
+    df = pd.DataFrame(data, columns=headers)
+    df.to_excel(f"kingsleague_spain_split_{i+1}.xlsx", index=False)
+    sleep(1)
 
-# sleep(2)
+sleep(2)
 
 # Get data for cups spain
-# cups_xpath = [
-#     '//*[@id="main-container"]/main/section[1]/div[1]/div/button[3]',
-#     '//*[@id="main-container"]/main/section[1]/div[1]/div/button[4]',
-# ]
+cups_xpath = [
+    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[3]',
+    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[4]',
+]
 
-# global_index = 1
+global_index = 1
 
-# for cup_xpath in cups_xpath:
-#     element = driver.find_element(By.XPATH, cup_xpath)
-#     element.click()
-#     sleep(1)
-#     elements = driver.find_elements(
-#         By.XPATH, '//*[@id="main-container"]/main/section[1]/div[2]/div'
-#     )
-#     sleep(1)
-#     for sub_element in elements:
-#         group_element = sub_element.find_element(By.XPATH, ".//div")
-#         sleep(1)
+for cup_xpath in cups_xpath:
+    element = driver.find_element(By.XPATH, cup_xpath)
+    element.click()
+    sleep(1)
+    elements = driver.find_elements(
+        By.XPATH, '//*[@id="main-container"]/main/section[1]/div[2]/div'
+    )
+    sleep(1)
+    for sub_element in elements:
+        group_element = sub_element.find_element(By.XPATH, ".//div")
+        sleep(1)
 
-#         group_split = group_element.text.split("\n")
-#         group = "_".join(group_split)
+        group_split = group_element.text.split("\n")
+        group = "_".join(group_split)
 
-#         table_elements = sub_element.find_elements(
-#             By.XPATH, './/div[@id="standingDesktop"]/div/div'
-#         )
-#         sleep(1)
+        table_elements = sub_element.find_elements(
+            By.XPATH, './/div[@id="standingDesktop"]/div/div'
+        )
+        sleep(1)
 
-#         headers = []
-#         data = []
+        headers = []
+        data = []
 
-#         header_div = table_elements[0]
-#         header_texts = header_div.text.split("\n")
-#         headers = header_texts
+        header_div = table_elements[0]
+        header_texts = header_div.text.split("\n")
+        headers = header_texts
 
-#         for element in table_elements[1:]:
-#             text_list = element.text.split("\n")
-#             data.append(text_list)
+        for element in table_elements[1:]:
+            text_list = element.text.split("\n")
+            data.append(text_list)
 
-#         df = pd.DataFrame(data, columns=headers)
-#         df.to_excel(
-#             f"kingsleague_spain_cup_{group}_table_{global_index}.xlsx", index=False
-#         )
-#         global_index += 1
+        df = pd.DataFrame(data, columns=headers)
+        df.to_excel(
+            f"kingsleague_spain_cup_{group}_table_{global_index}.xlsx", index=False
+        )
+        global_index += 1
 
 # Americas
 element = driver.find_element(By.XPATH, '//*[@id="navbar-regions"]/ul/li[2]/a')

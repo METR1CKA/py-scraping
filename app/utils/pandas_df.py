@@ -11,8 +11,12 @@ class PandasDataFrame:
         self.docs = folder
         self.docsDir = self.app.joinPaths(folder)
 
-    def createDataFrame(self, data):
-        return pd.DataFrame(data)
+    def createDataFrame(self, data, headers: list[str] | None):
+        return (
+            pd.DataFrame(data, columns=headers)
+            if headers is not None
+            else pd.DataFrame(data)
+        )
 
     def exportToExcel(self, data: pd.DataFrame, folders: list, filename: str):
         fullFolderPath = self.app.joinPaths(self.docsDir, *folders)

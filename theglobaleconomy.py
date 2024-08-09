@@ -50,6 +50,6 @@ for row in rows:
 df = pd.DataFrame(data, columns=headers)
 
 # Guardar en Excel
-df.to_excel("theglobaleconomy.xlsx", index=False)
+df.to_excel("docs/theglobaleconomy/theglobaleconomy.xlsx", index=False)
 
 driver.quit()

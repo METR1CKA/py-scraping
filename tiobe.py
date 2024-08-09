@@ -67,7 +67,7 @@ for row in rows:
     data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("tiobe1.xlsx", index=False)
+df.to_excel("docs/tiobe/tiobe1.xlsx", index=False)
 sleep(1)
 
 # Extraer Otros lenguajes de programación
@@ -95,7 +95,7 @@ for row in rows:
     data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("tiobe2.xlsx", index=False)
+df.to_excel("docs/tiobe/tiobe2.xlsx", index=False)
 sleep(1)
 
 # Extraer Lenguajes de programación con mas Historia de muy largo plazo
@@ -118,7 +118,7 @@ for row in rows:
     data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("tiobe3.xlsx", index=False)
+df.to_excel("docs/tiobe/tiobe3.xlsx", index=False)
 
 # Extraer Lenguajes de programación del salón de la fama
 element = driver.find_element(By.XPATH, "/html/body/section/div/article/ul[2]/li[2]")
@@ -147,7 +147,7 @@ for i, row in enumerate(rows):
         data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("tiobe4.xlsx", index=False)
+df.to_excel("docs/tiobe/tiobe4.xlsx", index=False)
 
 sleep(1)
 

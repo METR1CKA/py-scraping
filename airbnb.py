@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium import webdriver
 from time import sleep
 import pandas as pd
-import re
 
 opts = Options()
 
@@ -184,10 +183,10 @@ sleep(1)
 data = []
 
 for element in elements:
-    text = element.find_elements(
+    texts = element.find_elements(
         By.XPATH, ".//div/div[2]/div/div/div/div/div/div[2]/div"
     )
-    text_lists = [t.text for t in text]
+    text_lists = [text.text for text in texts]
 
     data.append(
         {
@@ -206,7 +205,7 @@ for element in elements:
 
 df = pd.DataFrame(data)
 
-df.to_excel("airbnb.xlsx", index=False)
+df.to_excel("docs/airbnb/airbnb.xlsx", index=False)
 
 sleep(1)
 
