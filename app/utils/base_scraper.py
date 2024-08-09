@@ -1,9 +1,10 @@
 # app/utils/scraper.py
 
 
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from config.env import Env
@@ -49,7 +50,9 @@ class BaseScraper:
         self.driver.quit()
 
     def wait(self, seconds):
-        sleep(seconds)
+        WebDriverWait(self.driver, seconds).until(
+            EC.presence_of_element_located((By.XPATH, "//body"))
+        )
 
     def select(self, element, value):
         dropdown = Select(element)
