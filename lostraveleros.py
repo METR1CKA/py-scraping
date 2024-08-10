@@ -8,13 +8,9 @@ from time import sleep
 # Configuración del navegador
 opts = Options()
 
-user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
-
-opts.add_argument(f"{user_agent=}")
 opts.add_argument("--start-maximized")
 opts.add_argument("--disable-extensions")
 opts.add_argument("--no-sandbox")
-opts.add_argument("--disable-javascript")
 
 driver = webdriver.Chrome(service=ChromeService(), options=opts)
 
@@ -45,10 +41,12 @@ sleep(1)
 data = []
 
 for header in headers:
+    driver.execute_script("arguments[0].scrollIntoView();", header)
     title = header.text
     next_element = header.find_element(By.XPATH, "following-sibling::p[1]")
     curiosity = next_element.text
     data.append({"Titulo": title, "Curiosidad": curiosity})
+    sleep(1)
 
 df = pd.DataFrame(data)
 df.to_excel("docs/lostraveleros/lostravelos.xlsx", index=False)

@@ -9,9 +9,6 @@ from time import sleep
 # Configuración del navegador
 opts = Options()
 
-user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
-
-opts.add_argument(f"{user_agent=}")
 opts.add_argument("--start-maximized")
 opts.add_argument("--disable-extensions")
 opts.add_argument("--no-sandbox")
@@ -29,7 +26,9 @@ sleep(3)
 
 # Seleccionar "Latin America" en el dropdown
 element = driver.find_element(By.XPATH, '//select[@id="regions"]')
+sleep(1)
 dropdown = Select(element)
+sleep(2)
 dropdown.select_by_visible_text("Latin America")
 sleep(3)
 

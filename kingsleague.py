@@ -8,13 +8,9 @@ from time import sleep
 # Configuración del navegador
 opts = Options()
 
-user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
-
-opts.add_argument(f"{user_agent=}")
 opts.add_argument("--start-maximized")
 opts.add_argument("--disable-extensions")
 opts.add_argument("--no-sandbox")
-opts.add_argument("--disable-javascript")
 
 driver = webdriver.Chrome(service=ChromeService(), options=opts)
 
@@ -40,16 +36,19 @@ element.click()
 sleep(4)
 
 # Get data for splits spain
-splits_xpath = [
-    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[1]',
-    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[2]',
-    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[5]',
+splits_indexes = [
+    1,
+    2,
+    5,
 ]
 
-for i, split_xpath in enumerate(splits_xpath):
-    element = driver.find_element(By.XPATH, split_xpath)
+for i, split_index in enumerate(splits_indexes):
+    element = driver.find_element(
+        By.XPATH,
+        f'//*[@id="main-container"]/main/section[1]/div[1]/div/button[{split_index}]',
+    )
     element.click()
-    sleep(1)
+    sleep(5)
 
     elements = driver.find_elements(By.XPATH, '//*[@id="standingDesktop"]/div/div')
     sleep(1)
@@ -66,27 +65,35 @@ for i, split_xpath in enumerate(splits_xpath):
         data.append(text_list)
 
     df = pd.DataFrame(data, columns=headers)
-    df.to_excel(f"kingsleague_spain_split_{i+1}.xlsx", index=False)
+    df.to_excel(f"docs/kingsleague/spain/splits/split_{i+1}.xlsx", index=False)
     sleep(1)
 
-sleep(2)
-
 # Get data for cups spain
-cups_xpath = [
-    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[3]',
-    '//*[@id="main-container"]/main/section[1]/div[1]/div/button[4]',
+cups_indexes = [
+    3,
+    4,
 ]
 
 global_index = 1
 
-for cup_xpath in cups_xpath:
-    element = driver.find_element(By.XPATH, cup_xpath)
+for cup_index in cups_indexes:
+    element = driver.find_element(
+        By.XPATH,
+        f'//*[@id="main-container"]/main/section[1]/div[1]/div/button[{cup_index}]',
+    )
     element.click()
-    sleep(1)
+    sleep(5)
     elements = driver.find_elements(
         By.XPATH, '//*[@id="main-container"]/main/section[1]/div[2]/div'
     )
     sleep(1)
+
+    fullname = f"docs/kingsleague/spain"
+    if cup_index == 3:
+        fullname = f"{fullname}/kings_cup"
+    if cup_index == 4:
+        fullname = f"{fullname}/kingdom_cup"
+
     for sub_element in elements:
         group_element = sub_element.find_element(By.XPATH, ".//div")
         sleep(1)
@@ -112,18 +119,18 @@ for cup_xpath in cups_xpath:
 
         df = pd.DataFrame(data, columns=headers)
         df.to_excel(
-            f"kingsleague_spain_cup_{group}_table_{global_index}.xlsx", index=False
+            f"{fullname}/{group}.xlsx",
+            index=False,
         )
-        global_index += 1
 
 # Americas
 element = driver.find_element(By.XPATH, '//*[@id="navbar-regions"]/ul/li[2]/a')
 element.click()
-sleep(1)
+sleep(2)
 
 element = driver.find_element(By.XPATH, '//*[@id="competitionNavbar"]')
 element.click()
-sleep(1)
+sleep(2)
 
 element = driver.find_element(
     By.XPATH, '//*[@id="dropdownCompetitionNavbar"]/ul/li[2]/a'
@@ -135,7 +142,7 @@ element = driver.find_element(
     By.XPATH, '//*[@id="main-container"]/main/section[1]/div[1]/div/button'
 )
 element.click()
-sleep(1)
+sleep(5)
 
 elements = driver.find_elements(By.XPATH, '//*[@id="standingDesktop"]/div/div')
 sleep(1)
@@ -152,7 +159,7 @@ for element in elements[1:]:
     data.append(text_list)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel(f"kingsleague_americas_split_1.xlsx", index=False)
+df.to_excel("docs/kingsleague/americas/split_1.xlsx", index=False)
 
 sleep(2)
 

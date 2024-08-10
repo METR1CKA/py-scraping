@@ -8,9 +8,6 @@ from time import sleep
 # Configuración del navegador
 opts = Options()
 
-user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
-
-opts.add_argument(f"{user_agent=}")
 opts.add_argument("--start-maximized")
 opts.add_argument("--disable-extensions")
 opts.add_argument("--no-sandbox")
@@ -67,7 +64,7 @@ for row in rows:
     data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("docs/tiobe/tiobe1.xlsx", index=False)
+df.to_excel("docs/tiobe/Top20.xlsx", index=False)
 sleep(1)
 
 # Extraer Otros lenguajes de programación
@@ -95,7 +92,7 @@ for row in rows:
     data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("docs/tiobe/tiobe2.xlsx", index=False)
+df.to_excel("docs/tiobe/OtherProgrammingLanguages.xlsx", index=False)
 sleep(1)
 
 # Extraer Lenguajes de programación con mas Historia de muy largo plazo
@@ -118,7 +115,7 @@ for row in rows:
     data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("docs/tiobe/tiobe3.xlsx", index=False)
+df.to_excel("docs/tiobe/VeryLongTermHistory.xlsx", index=False)
 
 # Extraer Lenguajes de programación del salón de la fama
 element = driver.find_element(By.XPATH, "/html/body/section/div/article/ul[2]/li[2]")
@@ -147,7 +144,7 @@ for i, row in enumerate(rows):
         data.append(cols)
 
 df = pd.DataFrame(data, columns=headers)
-df.to_excel("docs/tiobe/tiobe4.xlsx", index=False)
+df.to_excel("docs/tiobe/ProgrammingLanguageHallOfFame.xlsx", index=False)
 
 sleep(1)
 
