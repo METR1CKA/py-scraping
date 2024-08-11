@@ -316,3 +316,75 @@ class Scripts:
             filename=self.scraper.data.get("filename"),
         )
         self.scraper.waitTime(self.scraper.data.get("time"))
+
+    def meteoreTables(self):
+        # Setear datos y acumular las ciudades
+        self.scraper.setProperties()
+        cities = self.scraper.data.get("cities")
+        for city in cities:
+            # Acumular datos
+            full_data = []
+            # Ingresar la primer ciudad
+            seearch_city = self.scraper.data.get("search-city")
+            selector = seearch_city.get("selector")
+            element = self.scraper.getElement(self.scraper.by, selector)
+            element.send_keys(city)
+            self.scraper.waitTime(seearch_city.get("time"))
+            # Seleccionar la primera opción
+            select_first = self.scraper.data.get("select-first")
+            selector = select_first.get("selector")
+            element = self.scraper.getElement(self.scraper.by, selector)
+            element.click()
+            self.scraper.waitTime(select_first.get("time"))
+            # Seleccionar los dias
+            days_indexes = self.scraper.data.get("days-indexes")
+            for day_index in days_indexes:
+                # Ir a la sección de los días
+                select_section = self.scraper.data.get("select-section")
+                selector = select_section.get("selector")
+                element = self.scraper.getElement(
+                    self.scraper.by,
+                    selector.replace(":day_index", str(day_index)),
+                )
+                self.scraper.scrollIntoView(element)
+                self.scraper.waitTime(select_section.get("time"))
+                element.click()
+                self.scraper.waitTime(select_section.get("time"))
+                # Obtener los datos
+                get_elements = self.scraper.data.get("get-elements")
+                selector = get_elements.get("selector")
+                elements = self.scraper.getElements(self.scraper.by, selector)
+                data = [element.text for element in elements]
+                data = [entry for entry in data if entry]
+                # Procesar los datos
+                process_data = []
+                for entry in data:
+                    parts = entry.split("\n")
+                    (
+                        hora,
+                        temperatura,
+                        sensacion_termica,
+                        viento,
+                        velocidad,
+                        indice_uv,
+                        fps,
+                    ) = parts
+                    process_data.append(
+                        {
+                            "Hora": hora,
+                            "Temperatura": temperatura,
+                            "Sensación Termica": sensacion_termica,
+                            "Viento": viento,
+                            "Velocidad": velocidad,
+                            "Índice UV": indice_uv,
+                            "FPS": fps,
+                        }
+                    )
+                full_data += process_data
+            # Crear el DataFrame y guardar en archivo Excel
+            df = self.pandas.createDataFrame(full_data)
+            self.pandas.exportToExcel(
+                df, folders=self.scraper.data.get("paths"), filename=f"{city}.xlsx"
+            )
+            self.scraper.scrollTop()
+            self.scraper.waitTime(self.scraper.data.get("time"))

@@ -1,12 +1,39 @@
 {
   "steps": [
     {
-      "step": 1,
+      "id": 1,
       "name": "Ingresar a la página de Meteored",
       "action": "GET",
       "data": {
         "url": "https://www.meteored.mx/",
         "time": 5
+      }
+    },
+    {
+      "id": 2,
+      "name": "Automatizar por iteración de cada ciudad obtener los datos de dos dias diferentes",
+      "action": "METEORED-DATA",
+      "data": {
+        "by": "XPATH",
+        "cities": ["Torreón", "Gomez Palacio", "Monterrey"],
+        "search-city": {
+          "selector": "//*[@id='search_pc']",
+          "time": 4
+        },
+        "select-first": {
+          "selector": "//*[@id='resultados']/ul/li[1]",
+          "time": 4
+        },
+        "days-indexes": [4, 5],
+        "select-section": {
+          "selector": "/html/body/main/div[2]/section/section[2]/div/ul/li[:day_index]/span",
+          "time": 3
+        },
+        "get-elements": {
+          "selector": "/html/body/div[1]/div[1]/section/div/table/tbody[2]/tr"
+        },
+        "paths": ["meteored"],
+        "time": 4
       }
     }
   ]

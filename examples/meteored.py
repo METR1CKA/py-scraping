@@ -24,23 +24,19 @@ cities = ["Torreón", "Gomez Palacio", "Monterrey"]
 for city in cities:
     # Acumular datos
     full_data = []
-
     # Ingresar la primer ciudad
     element = driver.find_element(By.XPATH, '//*[@id="search_pc"]')
     element.send_keys(city)
     sleep(3)
-
     # Seleccionar la primera opción
     element = driver.find_element(By.XPATH, '//*[@id="resultados"]/ul/li[1]')
     element.click()
     sleep(3)
-
     # Seleccionar los dias
     days_indexes = [
         4,
         5,
     ]
-
     for day_index in days_indexes:
         # Ir a la sección de los días
         element = driver.find_element(
@@ -51,14 +47,12 @@ for city in cities:
         sleep(3)
         element.click()
         sleep(3)
-
         # Obtener los datos
         elements = driver.find_elements(
             By.XPATH, "/html/body/div[1]/div[1]/section/div/table/tbody[2]/tr"
         )
         data = [element.text for element in elements]
         data = [entry for entry in data if entry]
-
         # Procesar los datos
         process_data = []
         for entry in data:
@@ -78,11 +72,9 @@ for city in cities:
                 }
             )
         full_data += process_data
-
     # Crear DataFrame y guardar en archivo Excel
     df = pd.DataFrame(full_data)
     df.to_excel(f"docs/meteored/{city}.xlsx", index=False)
-
     # Regresar a la página principal
     driver.execute_script("window.scrollTo(0, 0);")
     sleep(3)

@@ -23,7 +23,7 @@ class Scraper(BaseScraper):
             "EXTRACT-TABLE": self.scripts.extractTable,
             "EXTRACT-TABLES": self.scripts.extractTables,
             "HOF-TABLE": self.scripts.hallOfFameTable,
-            "METEORED": {},
+            "METEORED-DATA": self.scripts.meteoreTables,
         }
 
     def run(self):
