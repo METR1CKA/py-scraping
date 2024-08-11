@@ -1,3 +1,10 @@
 {
-  "url": "https://www.airbnb.com/"
+  "steps": [
+    {
+      "action": "GET",
+      "data": {
+        "url": "https://www.airbnb.com/"
+      }
+    }
+  ]
 }

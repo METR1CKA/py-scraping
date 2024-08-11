@@ -22,3 +22,6 @@ class App:
 
     def listDir(self, path):
         return os.listdir(path)
+
+    def clear(self):
+        os.system("clear")

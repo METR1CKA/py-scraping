@@ -1,6 +1,7 @@
-# app/utils/scraper.py
+# app/base_scraper.py
 
 
+from time import sleep
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
@@ -8,19 +9,19 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from config.env import Env
-from time import sleep
 
 
 class BaseScraper:
-    def __init__(self, headless=False):
-        self.env = Env()
+    def __init__(self, headless=False, env=False):
         self.opts = Options()
-        self.opts.add_argument(f"user-agent={self.env.getEnv('USER_AGENT')}")
+        if env:
+            self.env = Env()
+            self.opts.add_argument(f"user-agent={self.env.getEnv('USER_AGENT')}")
+        if headless:
+            self.opts.add_argument("--headless")
         self.opts.add_argument("--start-maximized")
         self.opts.add_argument("--disable-extensions")
         self.opts.add_argument("--no-sandbox")
-        if headless:
-            self.opts.add_argument("--headless")
         self.driver = webdriver.Chrome(service=ChromeService(), options=self.opts)
         self.by = {
             "XPATH": By.XPATH,
@@ -34,22 +35,26 @@ class BaseScraper:
         self.driver.get(url)
         self.wait(5)
 
-    def find(self, by, value, onlyElement=True):
-        return (
-            self.driver.find_element(by, value)
-            if onlyElement
-            else self.driver.find_elements(by, value)
-        )
+    def find(self, by, value):
+        return self.driver.find_element(by, value)
+
+    def finds(self, by, value):
+        return self.driver.find_elements(by, value)
 
     def scrollIntoView(self, element):
         script = "arguments[0].scrollIntoView();"
         self.driver.execute_script(script, element)
         self.wait(1)
 
-    def quit(self):
-        self.driver.quit()
+    def scrollTop(self):
+        script = "window.scrollTo(0, 0);"
+        self.driver.execute_script(script)
+        self.wait(1)
 
     def wait(self, seconds):
+        sleep(seconds)
+
+    def waitPage(self, seconds):
         WebDriverWait(self.driver, seconds).until(
             EC.presence_of_element_located((By.XPATH, "//body"))
         )
@@ -62,3 +67,6 @@ class BaseScraper:
     def insertInput(self, element, value):
         element.send_keys(value)
         self.wait(1)
+
+    def quit(self):
+        self.driver.quit()
