@@ -1,12 +1,60 @@
 {
   "steps": [
     {
-      "step": 1,
+      "id": 1,
       "name": "Ingresar a la página de Los Traveleros",
       "action": "GET",
       "data": {
         "url": "https://lostraveleros.com/",
         "time": 5
+      }
+    },
+    {
+      "id": 2,
+      "name": "Buscar 25 curiosidades de México",
+      "action": "SEND-KEYS",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='tie-block_897']/div/div/div/form/label/input",
+        "keys": "25 curiosidades de méxico",
+        "time": 5,
+        "submit": true
+      }
+    },
+    {
+      "id": 3,
+      "name": "Dar click en la primera opción",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='posts-container']/li[1]/div/a",
+        "time": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "Scrollear hasta el primer párrafo",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='the-post']/div[1]/p[1]",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 5,
+      "name": "Extraer los elementos de la página",
+      "action": "EXTRACT",
+      "data": {
+        "by": "XPATH",
+        "selector": {
+          "headers": "//*[@id='the-post']/div[1]/h3",
+          "next_element": "following-sibling::p[1]"
+        },
+        "time": 1,
+        "paths": ["lostraveleros"],
+        "filename": "curiosidades_mexico"
       }
     }
   ]

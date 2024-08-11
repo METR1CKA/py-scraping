@@ -178,31 +178,16 @@
     {
       "id": 13,
       "name": "Extraer los datos",
-      "action": "ELEMENTS",
+      "action": "PLACES",
       "data": {
         "by": "XPATH",
-        "selector": "//*[@id='site-content']/div/div[2]/div[1]/div/div/div/div/div",
-        "time": 1
-      }
-    },
-    {
-      "id": 14,
-      "name": "Extraer los datos",
-      "action": "PROCESS-ELEMENTS",
-      "data": {
-        "by": "XPATH",
-        "selector": ".//div/div[2]/div/div/div/div/div/div[2]/div",
-        "time": 1
-      }
-    },
-    {
-      "id": 15,
-      "name": "Guardar en excel",
-      "action": "SAVE-EXCEL",
-      "data": {
+        "selector": {
+          "value-1": "//*[@id='site-content']/div/div[2]/div[1]/div/div/div/div/div",
+          "value-2": ".//div/div[2]/div/div/div/div/div/div[2]/div"
+        },
+        "time": 1,
         "paths": ["airbnb"],
-        "filename": "airbnb.xlsx",
-        "time": 1
+        "filename": "airbnb.xlsx"
       }
     }
   ]

@@ -90,9 +90,12 @@ class BaseScraper:
 
     def SEND_KEYS(self):
         self.setProperties()
+        submit = self.data.get("submit")
         element = self.getElement(self.by, self.selector)
         self.waitTime(self.time)
         element.send_keys(self.keys)
+        if submit:
+            element.submit()
         self.waitTime(self.time)
 
     def CLICK(self):

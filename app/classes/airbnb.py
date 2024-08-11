@@ -1,8 +1,12 @@
 # app/classes/airbnb.py
 
 
+from app.utils.pandas_df import PandasDataFrame
+
+
 class Airbnb:
     def __init__(self, scraper):
+        self.pandas = PandasDataFrame()
         self.scraper = scraper
 
     def modal(self):
@@ -58,12 +62,16 @@ class Airbnb:
         self.scraper.setData(send)
         self.scraper.CLICK()
 
-    def processElements(self):
+    def places(self):
         data = []
         self.scraper.setProperties()
-        for element in self.scraper.elements:
+        selector1 = self.scraper.selector.get("value-1")
+        selector2 = self.scraper.selector.get("value-2")
+        elements = self.scraper.getElements(self.scraper.by, selector1)
+        self.scraper.waitTime(self.scraper.time)
+        for element in elements:
             # Acceder a los sub elementos
-            texts = element.find_elements(self.scraper.by, self.scraper.selector)
+            texts = element.find_elements(self.scraper.by, selector2)
             # Extraer el texto de los sub elementos
             text_lists = [text.text for text in texts]
             lugar, descripcion, areaArr, fechaArr, precioArr, calificacionArr = (
@@ -96,4 +104,10 @@ class Airbnb:
                     "Calificación promedio": calificacion,
                 }
             )
-        self.scraper.elements = data
+        # self.scraper.elements = data
+        df = self.pandas.createDataFrame(data)
+        self.pandas.exportToExcel(
+            df,
+            folders=self.scraper.data.get("paths"),
+            filename=self.scraper.data.get("filename"),
+        )

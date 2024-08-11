@@ -2,7 +2,7 @@
 
 
 from app.classes.kingsleague import KingsLeague
-from app.utils.pandas_df import PandasDataFrame
+from app.classes.lostraveleros import LosTraveleros
 from app.utils.base_scraper import BaseScraper
 from config.instructions import Instructions
 from app.classes.airbnb import Airbnb
@@ -12,6 +12,7 @@ class Scraper(BaseScraper):
     def __init__(self, instructions: Instructions, config, file):
         self.airbnb = Airbnb(self)
         self.kingsleague = KingsLeague(self)
+        self.lostraveleros = LosTraveleros(self)
         self.super = super()
         self.instructions = instructions
         self.config = config.strip()
@@ -19,13 +20,19 @@ class Scraper(BaseScraper):
         self.specifiedActions = {
             "AIRBNB": {
                 "MODAL": self.airbnb.modal,
-                "PROCESS-ELEMENTS": self.airbnb.processElements,
+                "PLACES": self.airbnb.places,
             },
             "KINGSLEAGUE": {
                 "SPAIN-SPLITS": self.kingsleague.splits,
                 "SPAIN-CUPS": self.kingsleague.cups,
                 "AMERICAS-SPLITS": self.kingsleague.splits,
             },
+            "LOSTRAVELEROS": {
+                "EXTRACT": self.lostraveleros.extract,
+            },
+            "METEORED": {},
+            "THEGLOBALECONOMY": {},
+            "TIOBE": {},
         }
 
     def run(self):

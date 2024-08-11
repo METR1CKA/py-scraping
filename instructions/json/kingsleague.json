@@ -1,7 +1,7 @@
 {
   "steps": [
     {
-      "step": 1,
+      "id": 1,
       "name": "Ingresar a la página de la Kings League",
       "action": "GET",
       "data": {
