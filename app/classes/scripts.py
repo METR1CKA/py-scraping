@@ -157,6 +157,7 @@ class Scripts:
         self.scraper.waitTime(time)
         # Iterar sobre los splits
         for i, split_index in enumerate(split_indexes):
+            self.scraper.waitTime(time)
             element = self.scraper.getElement(
                 self.scraper.by, selector1.replace(":index", str(split_index))
             )
@@ -189,6 +190,7 @@ class Scripts:
         selector4 = self.scraper.selector.get("value-4")
         self.scraper.waitTime(time)
         for cup_index in cup_indexes:
+            self.scraper.waitTime(time)
             element = self.scraper.getElement(
                 self.scraper.by, selector1.replace(":index", str(cup_index))
             )
@@ -226,6 +228,7 @@ class Scripts:
         self.scraper.waitTime(self.scraper.time)
         data = []
         for header in headers:
+            self.scraper.waitTime(self.scraper.time)
             self.scraper.scrollIntoView(header)
             title = header.text
             next_element = header.find_element(self.scraper.by, next_element_xpath)
@@ -339,6 +342,7 @@ class Scripts:
             # Seleccionar los dias
             days_indexes = self.scraper.data.get("days-indexes")
             for day_index in days_indexes:
+                self.scraper.waitTime(select_first.get("time"))
                 # Ir a la sección de los días
                 select_section = self.scraper.data.get("select-section")
                 selector = select_section.get("selector")
