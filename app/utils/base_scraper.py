@@ -35,6 +35,7 @@ class BaseScraper:
             "SCROLL": self.SCROLL,
             "ELEMENTS": self.ELEMENTS,
             "SAVE-EXCEL": self.SAVE_EXCEL,
+            "SELECT": self.SELECT_DROPDOWN,
         }
 
     def getByTyped(self, byName):
@@ -125,3 +126,10 @@ class BaseScraper:
         pandas.exportToExcel(
             data=df, folders=self.data.get("paths"), filename=self.data.get("filename")
         )
+
+    def SELECT_DROPDOWN(self):
+        self.setProperties()
+        element = self.getElement(self.by, self.selector)
+        dropdown = Select(element)
+        dropdown.select_by_visible_text(self.keys)
+        self.waitTime(self.time)

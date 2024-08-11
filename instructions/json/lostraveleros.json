@@ -45,7 +45,7 @@
     {
       "id": 5,
       "name": "Extraer los elementos de la página",
-      "action": "EXTRACT",
+      "action": "EXTRACT-DIVS",
       "data": {
         "by": "XPATH",
         "selector": {

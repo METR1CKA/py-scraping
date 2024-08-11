@@ -1,11 +1,51 @@
 {
   "steps": [
     {
-      "step": 1,
+      "id": 1,
       "name": "Ingresar a la página de The Global Economy",
       "action": "GET",
       "data": {
         "url": "https://www.theglobaleconomy.com/",
+        "time": 5
+      }
+    },
+    {
+      "id": 2,
+      "name": "Ir a la sección de ranking de países",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='menu']/li[6]/a/span",
+        "time": 1
+      }
+    },
+    {
+      "id": 3,
+      "name": "Seleccionar Latinoamérica",
+      "action": "SELECT",
+      "data": {
+        "by": "XPATH",
+        "selector": "//select[@id='regions']",
+        "keys": "Latin America",
+        "time": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "Obtener los datos de la tabla",
+      "action": "EXTRACT-TABLE",
+      "data": {
+        "type-selector": {
+          "headers-rows": "XPATH",
+          "cols": "TAG_NAME"
+        },
+        "selectors": {
+          "headers": "//*[@id='benchmarkTable']/thead/tr/th",
+          "rows": "//*[@id='benchmarkTable']/tbody/tr",
+          "cols": "td"
+        },
+        "paths": ["theglobaleconomy"],
+        "filename": "rankings",
         "time": 5
       }
     }

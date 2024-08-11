@@ -1,8 +1,9 @@
 # app/scraper.py
 
 
-from app.classes.kingsleague import KingsLeague
+from app.classes.theglobaleconomy import TheGlobalEconomy
 from app.classes.lostraveleros import LosTraveleros
+from app.classes.kingsleague import KingsLeague
 from app.utils.base_scraper import BaseScraper
 from config.instructions import Instructions
 from app.classes.airbnb import Airbnb
@@ -13,6 +14,7 @@ class Scraper(BaseScraper):
         self.airbnb = Airbnb(self)
         self.kingsleague = KingsLeague(self)
         self.lostraveleros = LosTraveleros(self)
+        self.theglobaleconomy = TheGlobalEconomy(self)
         self.super = super()
         self.instructions = instructions
         self.config = config.strip()
@@ -20,7 +22,7 @@ class Scraper(BaseScraper):
         self.specifiedActions = {
             "AIRBNB": {
                 "MODAL": self.airbnb.modal,
-                "PLACES": self.airbnb.places,
+                "EXTRACT-PLACES": self.airbnb.places,
             },
             "KINGSLEAGUE": {
                 "SPAIN-SPLITS": self.kingsleague.splits,
@@ -28,10 +30,12 @@ class Scraper(BaseScraper):
                 "AMERICAS-SPLITS": self.kingsleague.splits,
             },
             "LOSTRAVELEROS": {
-                "EXTRACT": self.lostraveleros.extract,
+                "EXTRACT-DIVS": self.lostraveleros.extractTableDivs,
             },
             "METEORED": {},
-            "THEGLOBALECONOMY": {},
+            "THEGLOBALECONOMY": {
+                "EXTRACT-TABLE": self.theglobaleconomy.extractTable,
+            },
             "TIOBE": {},
         }
 

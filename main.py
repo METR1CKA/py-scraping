@@ -15,10 +15,6 @@ def main(app: App):
             print("\nSaliendo del programa...\n")
             break
         menu.executeChoice(optionName=option_name, optionNumber=option_number)
-        # try:
-        # except Exception as e:
-        #     print(f"Error: {e}")
-        #     app.exit(1)
 
 
 if __name__ == "__main__":

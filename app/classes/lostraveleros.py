@@ -9,7 +9,7 @@ class LosTraveleros:
         self.scraper = scraper
         self.pandas = PandasDataFrame()
 
-    def extract(self):
+    def extractTableDivs(self):
         self.scraper.setProperties()
         headers_xpath = self.scraper.selector.get("headers")
         next_element_xpath = self.scraper.selector.get("next_element")

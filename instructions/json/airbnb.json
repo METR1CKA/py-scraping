@@ -178,7 +178,7 @@
     {
       "id": 13,
       "name": "Extraer los datos",
-      "action": "PLACES",
+      "action": "EXTRACT-PLACES",
       "data": {
         "by": "XPATH",
         "selector": {
