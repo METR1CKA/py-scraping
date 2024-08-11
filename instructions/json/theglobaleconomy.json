@@ -1,3 +1,13 @@
 {
-  "url": "https://www.theglobaleconomy.com/"
+  "steps": [
+    {
+      "step": 1,
+      "name": "Ingresar a la página de The Global Economy",
+      "action": "GET",
+      "data": {
+        "url": "https://www.theglobaleconomy.com/",
+        "time": 5
+      }
+    }
+  ]
 }

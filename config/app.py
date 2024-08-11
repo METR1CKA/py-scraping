@@ -1,7 +1,7 @@
 # config/app.py
 
 
-import os
+import os, sys
 
 
 class App:
@@ -25,3 +25,6 @@ class App:
 
     def clear(self):
         os.system("clear")
+
+    def exit(self, code):
+        sys.exit(code)

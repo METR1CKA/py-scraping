@@ -1,25 +1,30 @@
 # main.py
 
 
+from config.app import App
 from cli.menu import Menu
-import sys
 
 
-def main():
+def main(app: App):
     menu = Menu()
+    app.clear()
     menu.display("Menú principal")
-
     while True:
-        choice = menu.get()
-        if "Salir" in choice:
+        option_name, option_number = menu.get()
+        if "Salir" in option_name:
             print("\nSaliendo del programa...\n")
             break
-        print(f"\nSeleccionaste: {choice}")
+        menu.executeChoice(optionName=option_name, optionNumber=option_number)
+        # try:
+        # except Exception as e:
+        #     print(f"Error: {e}")
+        #     app.exit(1)
 
 
 if __name__ == "__main__":
+    application = App()
     try:
-        main()
+        main(app=application)
     except KeyboardInterrupt:
         print("\n\nSaliendo...\n")
-        sys.exit(0)
+        application.exit(0)

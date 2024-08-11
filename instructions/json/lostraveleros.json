@@ -1,3 +1,13 @@
 {
-  "url": "https://lostraveleros.com/"
+  "steps": [
+    {
+      "step": 1,
+      "name": "Ingresar a la página de Los Traveleros",
+      "action": "GET",
+      "data": {
+        "url": "https://lostraveleros.com/",
+        "time": 5
+      }
+    }
+  ]
 }

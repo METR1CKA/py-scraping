@@ -24,5 +24,7 @@ class Instructions:
     def showJsons(self, jsonDir=None):
         return self.app.listDir(jsonDir if jsonDir else self.dirs())
 
-    def get(self, config, key, default=None):
-        return self.data[config].get(key, default) if self.data else default
+    def getElement(self, config, key=None, default=None):
+        if key is None:
+            return self.data.get(config, default)
+        return self.data[config].get(key, default)

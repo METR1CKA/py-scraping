@@ -1,3 +1,13 @@
 {
-  "url": "https://www.meteored.mx/"
+  "steps": [
+    {
+      "step": 1,
+      "name": "Ingresar a la página de Meteored",
+      "action": "GET",
+      "data": {
+        "url": "https://www.meteored.mx/",
+        "time": 5
+      }
+    }
+  ]
 }

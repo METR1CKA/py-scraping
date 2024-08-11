@@ -1,9 +1,208 @@
 {
   "steps": [
     {
+      "id": 1,
+      "name": "Ingresar a la página de Airbnb",
       "action": "GET",
       "data": {
-        "url": "https://www.airbnb.com/"
+        "url": "https://www.airbnb.com/",
+        "time": 5
+      }
+    },
+    {
+      "id": 2,
+      "name": "Buscar alojamiento",
+      "action": "SEND_KEYS",
+      "data": {
+        "by": "XPATH",
+        "selector": "//input[@id='bigsearch-query-location-input']",
+        "keys": "Torreón",
+        "time": 5
+      }
+    },
+    {
+      "id": 3,
+      "name": "Seleccionar la primera opción",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//div[@id='bigsearch-query-location-suggestion-0']",
+        "time": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "Seleccionar la fecha de llegada",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//div[@class='p1m42al0 atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_1esdqks atm_cs_6adqpa atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v dir dir-ltr']",
+        "time": 1
+      }
+    },
+    {
+      "id": 5,
+      "name": "Elegir la opción flexible",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//button[@id='tab--tabs--2']",
+        "time": 1
+      }
+    },
+    {
+      "id": 6,
+      "name": "Seleccionar el tiempo que me gustaria quedarme",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//label[@id='flexible_trip_lengths-one_month']",
+        "time": 1
+      }
+    },
+    {
+      "id": 7,
+      "name": "Seleccionar cuando quiero ir",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//span[@class='l15ntb32 atm_ks_15vqwwr atm_ax_idpfg4 atm_bb_idpfg4 atm_9s_1txwivl atm_h_1h6ojuz atm_fc_1h6ojuz dir dir-ltr']",
+        "time": 1
+      }
+    },
+    {
+      "id": 8,
+      "name": "Seleccionar los huespedes",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='search-tabpanel']/div/div[5]/div[2]/div[1]/div/div[2]",
+        "time": 1
+      }
+    },
+    {
+      "id": 9,
+      "name": "Seleccionar el número de adultos",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='stepper-adults']/button[2]",
+        "time": 1
+      }
+    },
+    {
+      "id": 10,
+      "name": "Enviar la búsqueda",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//button[@data-testid='structured-search-input-search-button']",
+        "time": 5
+      }
+    },
+    {
+      "id": 11,
+      "name": "Seleccionar el filtrador",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//button[@data-testid='category-bar-filter-button']",
+        "time": 1
+      }
+    },
+    {
+      "id": 12,
+      "name": "Verificar el tipo de modal",
+      "action": "MODAL",
+      "data": {
+        "modal-opts-1": {
+          "type-place": {
+            "by": "XPATH",
+            "selector": "//button[@id='tab--tabs--2']",
+            "time": 1
+          },
+          "dropdown-services": {
+            "by": "XPATH",
+            "selector": "//section[@aria-labelledby='filter-section-heading-id-FILTER_SECTION_CONTAINER:MORE_FILTERS_AMENITIES_WITH_SUBCATEGORIES']",
+            "scroll": true,
+            "time": 1
+          },
+          "more-services": {
+            "by": "XPATH",
+            "selector": "//span[@class='lsqfxex atm_9s_1txwivl atm_h_1h6ojuz atm_cx_i2wt44 atm_le_ftgil2__oggzyc dir dir-ltr']",
+            "time": 1
+          },
+          "services": {
+            "by": "XPATH",
+            "selector": "//input[@name=':name']",
+            "time": 1,
+            "list": [
+              "Lavadora",
+              "Wifi",
+              "Cocina",
+              "Aire acondicionado",
+              "Secadora",
+              "Televisión",
+              "Plancha",
+              "Área para trabajar"
+            ]
+          }
+        },
+        "modal-opts-2": {
+          "type-place": {
+            "by": "XPATH",
+            "selector": "/html/body/div[10]/div/div/section/div/div/div[2]/div/div[2]/div/div[1]/div/div/div/div[2]/div/section/div/div[2]/div[1]/div[3]/span",
+            "time": 1
+          }
+        },
+        "rest-modal": {
+          "dropdown-language": {
+            "by": "XPATH",
+            "selector": "//*[@id='filter-section-heading-id-FILTER_SECTION_CONTAINER:HOST_LANGUAGE']",
+            "time": 1,
+            "scroll": true
+          },
+          "select-language": {
+            "by": "XPATH",
+            "selector": "//input[@id='filter-item-host_languages-es-row-checkbox']",
+            "time": 1
+          },
+          "send": {
+            "by": "XPATH",
+            "selector": "/html/body/div[10]/div/div/section/div/div/div[2]/div/div[2]/footer/div/a",
+            "time": 5
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "name": "Extraer los datos",
+      "action": "ELEMENTS",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='site-content']/div/div[2]/div[1]/div/div/div/div/div",
+        "time": 1
+      }
+    },
+    {
+      "id": 14,
+      "name": "Extraer los datos",
+      "action": "PROCESS-ELEMENTS",
+      "data": {
+        "by": "XPATH",
+        "selector": ".//div/div[2]/div/div/div/div/div/div[2]/div",
+        "time": 1
+      }
+    },
+    {
+      "id": 15,
+      "name": "Guardar en excel",
+      "action": "SAVE-EXCEL",
+      "data": {
+        "paths": ["airbnb"],
+        "filename": "airbnb.xlsx",
+        "time": 1
       }
     }
   ]

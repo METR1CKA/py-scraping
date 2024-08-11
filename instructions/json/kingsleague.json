@@ -1,3 +1,13 @@
 {
-  "url": "https://kingsleague.pro/"
+  "steps": [
+    {
+      "step": 1,
+      "name": "Ingresar a la página de la Kings League",
+      "action": "GET",
+      "data": {
+        "url": "https://kingsleague.pro/",
+        "time": 5
+      }
+    }
+  ]
 }

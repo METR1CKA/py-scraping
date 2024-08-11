@@ -172,6 +172,7 @@ element = driver.find_element(
 element.click()
 sleep(5)
 
+# Extraer los datos
 elements = driver.find_elements(
     By.XPATH,
     '//*[@id="site-content"]/div/div[2]/div[1]/div/div/div/div/div',

@@ -1,3 +1,13 @@
 {
-  "url": "https://www.tiobe.com/"
+  "steps": [
+    {
+      "step": 1,
+      "name": "Ingresar a la página de TIOBE",
+      "action": "GET",
+      "data": {
+        "url": "https://www.tiobe.com/",
+        "time": 5
+      }
+    }
+  ]
 }
