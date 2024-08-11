@@ -1,42 +1,29 @@
 # app/scraper.py
 
 
-from app.classes.theglobaleconomy import TheGlobalEconomy
-from app.classes.lostraveleros import LosTraveleros
-from app.classes.kingsleague import KingsLeague
 from app.utils.base_scraper import BaseScraper
 from config.instructions import Instructions
-from app.classes.airbnb import Airbnb
+from app.classes.scripts import Scripts
 
 
 class Scraper(BaseScraper):
     def __init__(self, instructions: Instructions, config, file):
-        self.airbnb = Airbnb(self)
-        self.kingsleague = KingsLeague(self)
-        self.lostraveleros = LosTraveleros(self)
-        self.theglobaleconomy = TheGlobalEconomy(self)
+        self.scripts = Scripts(self)
         self.super = super()
         self.instructions = instructions
         self.config = config.strip()
         self.json = file
         self.specifiedActions = {
-            "AIRBNB": {
-                "MODAL": self.airbnb.modal,
-                "EXTRACT-PLACES": self.airbnb.places,
-            },
-            "KINGSLEAGUE": {
-                "SPAIN-SPLITS": self.kingsleague.splits,
-                "SPAIN-CUPS": self.kingsleague.cups,
-                "AMERICAS-SPLITS": self.kingsleague.splits,
-            },
-            "LOSTRAVELEROS": {
-                "EXTRACT-DIVS": self.lostraveleros.extractTableDivs,
-            },
+            "MODAL": self.scripts.modal,
+            "EXTRACT-PLACES": self.scripts.extractPlaces,
+            "SPAIN-SPLITS": self.scripts.splits,
+            "SPAIN-CUPS": self.scripts.cups,
+            "AMERICAS-SPLITS": self.scripts.splits,
+            "EXTRACT-DIVS": self.scripts.extractTableDivs,
+            "EXTRACT-TABLE": self.scripts.extractTable,
+            "EXTRACT-TABLES": self.scripts.extractTables,
+            "HOF-TABLE": self.scripts.hallOfFameTable,
             "METEORED": {},
-            "THEGLOBALECONOMY": {
-                "EXTRACT-TABLE": self.theglobaleconomy.extractTable,
-            },
-            "TIOBE": {},
         }
 
     def run(self):
@@ -61,11 +48,8 @@ class Scraper(BaseScraper):
             if action in self.commonActions.keys():
                 self.commonActions[action]()
             # Verificar si la acción es válida para las acciones especificadas
-            config = self.config.upper()
-            if config in self.specifiedActions.keys():
-                specifiedActions = self.specifiedActions[config]
-                if action in specifiedActions.keys():
-                    specifiedActions[action]()
+            if action in self.specifiedActions.keys():
+                self.specifiedActions[action]()
         # Salir del navegador
         self.waitTime(1)
         self.quit()

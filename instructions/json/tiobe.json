@@ -1,11 +1,185 @@
 {
   "steps": [
     {
-      "step": 1,
+      "id": 1,
       "name": "Ingresar a la página de TIOBE",
       "action": "GET",
       "data": {
         "url": "https://www.tiobe.com/",
+        "time": 5
+      }
+    },
+    {
+      "id": 2,
+      "name": "Denegar cookies",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='CybotCookiebotDialogBodyButtonDecline']",
+        "time": 1
+      }
+    },
+    {
+      "id": 3,
+      "name": "Ir a las tablas de popularidad",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//li[@id='menu-item-1184']/a",
+        "time": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "Scrollear para ir a los encabezados del top 20",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "/html/body/section/div/article/p[2]",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 5,
+      "name": "Scrollear para extraer encabezados del top 20",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "/html/body/section/div/article/p[3]",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 6,
+      "name": "Obtener los datos del top 20",
+      "action": "EXTRACT-TABLES",
+      "data": {
+        "remove-change": true,
+        "type-selectors": {
+          "headers-rows-by": "XPATH",
+          "cols-by": "TAG_NAME"
+        },
+        "selectors": {
+          "headers-selector": "//*[@id='top20']/thead/tr/th",
+          "rows-selector": "//*[@id='top20']/tbody/tr",
+          "cols-selector": "td"
+        },
+        "paths": ["tiobe", "top20"],
+        "filename": "programming_languages",
+        "time": 5
+      }
+    },
+    {
+      "id": 7,
+      "name": "Scrollear para ir a los otros lenguajes de programación",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='container']",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 8,
+      "name": "Scrollear para extraer los otros lenguajes de programación",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "/html/body/section/div/article/h2[1]",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 9,
+      "name": "Obtener los datos de los otros lenguajes de programación",
+      "action": "EXTRACT-TABLES",
+      "data": {
+        "type-selectors": {
+          "headers-rows-by": "XPATH",
+          "cols-by": "TAG_NAME"
+        },
+        "selectors": {
+          "headers-selector": "//*[@id='otherPL']/thead/tr/th",
+          "rows-selector": "//*[@id='otherPL']/tbody/tr",
+          "cols-selector": "td"
+        },
+        "paths": ["tiobe", "others"],
+        "filename": "programming_languages",
+        "time": 5
+      }
+    },
+    {
+      "id": 10,
+      "name": "Scrollear para ir a los lenguajes de programación con mas historia de muy largo plazo",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "/html/body/section/div/article/ul[1]/li",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 11,
+      "name": "Obtener los datos de los lenguajes de programación con mas historia de muy largo plazo",
+      "action": "EXTRACT-TABLES",
+      "data": {
+        "type-selectors": {
+          "headers-rows-by": "XPATH",
+          "cols-by": "TAG_NAME"
+        },
+        "selectors": {
+          "headers-selector": "//*[@id='VLTH']/thead/tr/th",
+          "rows-selector": "//*[@id='VLTH']/tbody/tr",
+          "cols-selector": "td"
+        },
+        "paths": ["tiobe", "very-long-term-history"],
+        "filename": "programming_languages",
+        "time": 5
+      }
+    },
+    {
+      "id": 12,
+      "name": "Scrollear para ir a los lenguajes de programación del salón de la fama",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "/html/body/section/div/article/ul[2]/li[2]",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 13,
+      "name": "Scrollear para ir a los lenguajes de programación del salón de la fama",
+      "action": "SCROLL",
+      "data": {
+        "by": "XPATH",
+        "selector": "/html/body/section/div/article/p[10]",
+        "time": 1,
+        "scroll": true
+      }
+    },
+    {
+      "id": 14,
+      "name": "Obtener los datos de los lenguajes de programación del salón de la fama",
+      "action": "HOF-TABLE",
+      "data": {
+        "type-selectors": {
+          "rows-by": "XPATH",
+          "cols-headers-by": "TAG_NAME"
+        },
+        "selectors": {
+          "headers-selector": "th",
+          "rows-selector": "//*[@id='PLHoF']/tbody/tr",
+          "cols-selector": "td"
+        },
+        "paths": ["tiobe", "hall-of-fame"],
+        "filename": "programming_languages",
         "time": 5
       }
     }
