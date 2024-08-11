@@ -1,10 +1,7 @@
 # app/classes/airbnb.py
 
 
-from app.utils.base_scraper import BaseScraper
-
-
-class Airbnb(BaseScraper):
+class Airbnb:
     def __init__(self, scraper):
         self.scraper = scraper
 

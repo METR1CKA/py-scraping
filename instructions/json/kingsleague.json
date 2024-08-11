@@ -5,8 +5,121 @@
       "name": "Ingresar a la página de la Kings League",
       "action": "GET",
       "data": {
-        "url": "https://kingsleague.pro/",
+        "url": "https://kingsleague.pro/es/espana",
         "time": 5
+      }
+    },
+    {
+      "id": 2,
+      "name": "Desactivar cookies",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='lw-banner']/div/div[2]/div/button[2]",
+        "time": 1
+      }
+    },
+    {
+      "id": 3,
+      "name": "Competiciones",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//button[@id='competitionNavbar']",
+        "time": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "Calificaciones",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='dropdownCompetitionNavbar']/ul/li[2]/a",
+        "time": 4
+      }
+    },
+    {
+      "id": 5,
+      "name": "Splits",
+      "action": "SPAIN-SPLITS",
+      "data": {
+        "indexes": [1, 2, 5],
+        "by": "XPATH",
+        "time": 5,
+        "paths": ["kingsleague", "spain", "splits"],
+        "filename": "split_:index",
+        "selector": {
+          "value-1": "//*[@id='main-container']/main/section[1]/div[1]/div/button[:index]",
+          "value-2": "//*[@id='standingDesktop']/div/div"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "Cups",
+      "action": "SPAIN-CUPS",
+      "data": {
+        "indexes": [3, 4],
+        "by": "XPATH",
+        "time": 5,
+        "selector": {
+          "value-1": "//*[@id='main-container']/main/section[1]/div[1]/div/button[:index]",
+          "value-2": "//*[@id='main-container']/main/section[1]/div[2]/div",
+          "value-3": ".//div",
+          "value-4": ".//div[@id='standingDesktop']/div/div"
+        },
+        "paths": {
+          "folders": ["kingsleague", "spain"],
+          "kings_cup": "kings_cup",
+          "kingdom_cup": "kingdom_cup"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "Ir a las ligas de americas",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='navbar-regions']/ul/li[2]/a",
+        "time": 2
+      }
+    },
+    {
+      "id": 8,
+      "name": "Competiciones",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='competitionNavbar']",
+        "time": 2
+      }
+    },
+    {
+      "id": 9,
+      "name": "Calificaciones",
+      "action": "CLICK",
+      "data": {
+        "by": "XPATH",
+        "selector": "//*[@id='dropdownCompetitionNavbar']/ul/li[2]/a",
+        "time": 4
+      }
+    },
+    {
+      "id": 10,
+      "name": "Splits",
+      "action": "SPAIN-SPLITS",
+      "data": {
+        "indexes": [1],
+        "by": "XPATH",
+        "time": 5,
+        "paths": ["kingsleague", "americas", "splits"],
+        "filename": "split_:index",
+        "selector": {
+          "value-1": "//*[@id='main-container']/main/section[1]/div[:index]/div/button",
+          "value-2": "//*[@id='standingDesktop']/div/div"
+        }
       }
     }
   ]

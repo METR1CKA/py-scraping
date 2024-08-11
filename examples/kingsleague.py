@@ -74,8 +74,6 @@ cups_indexes = [
     4,
 ]
 
-global_index = 1
-
 for cup_index in cups_indexes:
     element = driver.find_element(
         By.XPATH,

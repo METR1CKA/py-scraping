@@ -2,8 +2,7 @@
 
 
 from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from app.utils.pandas_df import PandasDataFrame
 from selenium.webdriver.common.by import By
@@ -31,7 +30,7 @@ class BaseScraper:
         }
         self.commonActions = {
             "GET": self.GET,
-            "SEND_KEYS": self.SEND_KEYS,
+            "SEND-KEYS": self.SEND_KEYS,
             "CLICK": self.CLICK,
             "SCROLL": self.SCROLL,
             "ELEMENTS": self.ELEMENTS,
@@ -54,9 +53,6 @@ class BaseScraper:
     def scrollTop(self):
         script = "window.scrollTo(0, 0);"
         self.driver.execute_script(script)
-
-    def webWait(self, seconds):
-        return WebDriverWait(self.driver, seconds, 1)
 
     def waitTime(self, seconds=None):
         time.sleep(seconds if seconds else 1)
